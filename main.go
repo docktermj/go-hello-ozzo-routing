@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/docktermj/go-hello-ozzo-routing/handler"
 	"github.com/go-ozzo/ozzo-routing"
 	"github.com/go-ozzo/ozzo-routing/access"
 	"github.com/go-ozzo/ozzo-routing/content"
@@ -20,14 +21,20 @@ func main() {
 		access.Logger(log.Printf),
 		slash.Remover(http.StatusMovedPermanently),
 		fault.Recovery(log.Printf),
+		handler.Urlrewrite(http.StatusMovedPermanently),
 	)
 
 	// serve RESTful APIs
 	api := router.Group("/api")
+
 	api.Use(
 		// these handlers are shared by the routes in the api group only
 		content.TypeNegotiator(content.JSON, content.XML),
 	)
+
+	api.Get(`/mary`, func(c *routing.Context) error {
+		return c.Write("user list2")
+	})
 	api.Get("/users", func(c *routing.Context) error {
 		return c.Write("user list")
 	})
