@@ -36,7 +36,8 @@ curl -v -X GET http://localhost:8080/streaming
 ```console
 export GOPATH="${HOME}/go"
 export PATH="${PATH}:${GOPATH}/bin:/usr/local/go/bin"
-export PROJECT_DIR=${GOPATH}/src/github.com/docktermj
+export PROJECT_DIR="${GOPATH}/src/github.com/docktermj"
+export REPOSITORY_DIR="${PROJECT_DIR}/go-hello-ozzo-routing"
 ```
 
 #### Download project
@@ -50,7 +51,7 @@ git clone git@github.com:docktermj/go-hello-ozzo-routing.git
 #### Download dependencies
 
 ```console
-cd ${PROJECT_DIR}/go-hello-ozzo-routing
+cd ${REPOSITORY_DIR}
 make dependencies
 ```
 
@@ -59,7 +60,7 @@ make dependencies
 #### Local build
 
 ```console
-cd ${PROJECT_DIR}/go-hello-ozzo-routing
+cd ${REPOSITORY_DIR}
 make
 ```
 
