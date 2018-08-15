@@ -1,0 +1,3 @@
+[[constraint]]
+  name = "github.com/go-ozzo/ozzo-routing"
+  branch = "master"

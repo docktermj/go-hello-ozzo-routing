@@ -9,14 +9,14 @@ BUILD_ITERATION := $(shell git log $(BUILD_TAG)..HEAD --oneline | wc -l)
 
 # The first "make" target runs as default.
 .PHONY: default
-default: build
+default: build-local
 
 # -----------------------------------------------------------------------------
 # Local development
 # -----------------------------------------------------------------------------
 
-.PHONY: build
-build:
+.PHONY: build-local
+build-local:
 	go install github.com/docktermj/$(PROGRAM_NAME)
 
 
@@ -24,14 +24,15 @@ build:
 test:
 	go test github.com/docktermj/$(PROGRAM_NAME)/...
 
+
 # -----------------------------------------------------------------------------
 # Utility targets
 # -----------------------------------------------------------------------------
 
-
 .PHONY: dependencies
 dependencies:
-	go get -u github.com/go-ozzo/ozzo-routing
+	go get -u github.com/golang/dep/cmd/dep
+	dep ensure
 
 
 .PHONY: help
